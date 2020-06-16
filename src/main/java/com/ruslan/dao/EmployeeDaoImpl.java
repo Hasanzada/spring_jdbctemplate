@@ -14,7 +14,7 @@ import java.util.Optional;
 public class EmployeeDaoImpl implements DAO<Employee> {
 
     @Autowired
-    private JdbcTemplate jdbcTemplate;
+    JdbcTemplate jdbcTemplate;
 
     private final String SQL_FIND_EMPLOYEE = "SELECT * FROM EMPLOYEES WHERE ID = ?";
     private final String SQL_DELETE_EMPLOYEE = "DELETE FROM EMPLOYEES WHERE ID = ?";
