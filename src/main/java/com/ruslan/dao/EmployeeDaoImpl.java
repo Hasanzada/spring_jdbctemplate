@@ -12,6 +12,7 @@ import java.util.List;
 @Repository
 public class EmployeeDaoImpl implements DAO<Employee> {
 
+    @Autowired
     private JdbcTemplate jdbcTemplate;
 
     private final String SQL_FIND_EMPLOYEE = "SELECT * FROM EMPLOYEES WHERE ID = ?";
@@ -22,10 +23,6 @@ public class EmployeeDaoImpl implements DAO<Employee> {
     private final String SQL_INSERT_EMPLOYEE = "INSERT INTO EMPLOYEES(NAME, SURNAME, AGE, SALARY) " +
             "VALUES(?,?,?,?)";
 
-    @Autowired
-    EmployeeDaoImpl(DataSource dataSource){
-        jdbcTemplate = new JdbcTemplate(dataSource);
-    }
 
     @Override
     public Employee getId(int id) {
