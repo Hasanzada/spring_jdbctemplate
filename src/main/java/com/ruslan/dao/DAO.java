@@ -1,10 +1,13 @@
 package com.ruslan.dao;
 
+import com.ruslan.model.Employee;
+
 import java.util.List;
+import java.util.Optional;
 
- public interface DAO<A> {
+public interface DAO<A> {
 
-    A getId(int id);
+    Optional<Employee> getId(int id);
 
     List<A> getAll();
 

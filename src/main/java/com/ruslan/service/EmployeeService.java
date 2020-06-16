@@ -19,7 +19,7 @@ public class EmployeeService {
     }
 
     public Employee getEmployeeById(int id) {
-        return dao.getId(id);
+        return dao.getId(id).get();
     }
 
     public boolean deleteEmployee(int id) {

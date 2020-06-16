@@ -3,11 +3,12 @@ package com.ruslan.dao;
 import com.ruslan.model.Employee;
 import com.ruslan.model.EmployeeMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
-import javax.sql.DataSource;
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public class EmployeeDaoImpl implements DAO<Employee> {
@@ -25,8 +26,9 @@ public class EmployeeDaoImpl implements DAO<Employee> {
 
 
     @Override
-    public Employee getId(int id) {
-        return jdbcTemplate.queryForObject(SQL_FIND_EMPLOYEE, new Object[]{id}, new EmployeeMapper());
+    public Optional<Employee> getId(int id) {
+        return Optional.of(jdbcTemplate.queryForObject(SQL_FIND_EMPLOYEE, new Object[]{id},
+                new BeanPropertyRowMapper<Employee>(Employee.class)));
     }
 
     @Override
@@ -36,7 +38,7 @@ public class EmployeeDaoImpl implements DAO<Employee> {
 
     @Override
     public boolean delete(int id) {
-        Employee emp = this.getId(id);
+        Employee emp = this.getId(id).get();
         return jdbcTemplate.update(SQL_DELETE_EMPLOYEE, emp.getId()) > 0;
     }
 
